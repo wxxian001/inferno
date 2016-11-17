@@ -28,8 +28,5 @@
   ],
   "dependencies": {
     "inferno": "1.0.0-beta9"
-  },
-  "devDependencies": {
-    "typescript": "^2.0.2"
   }
 }

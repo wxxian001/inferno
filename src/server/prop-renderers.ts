@@ -3,7 +3,7 @@ import {
 	isNullOrUndef,
 	isNumber,
 	isTrue
-} from './../shared';
+} from '../shared';
 import { isUnitlessNumber } from '../DOM/constants';
 import {
 	toHyphenCase,
@@ -34,7 +34,7 @@ export function renderAttributes(props): string[] {
 	const outputAttrs: string[] = [];
 	const propsKeys = (props && Object.keys(props)) || [];
 
-	propsKeys.forEach((propKey, i) => {
+	propsKeys.forEach((propKey) => {
 		const value = props[propKey];
 		switch (propKey) {
 			case 'dangerouslySetInnerHTML':

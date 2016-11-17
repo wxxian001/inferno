@@ -78,9 +78,7 @@ function createBundle({ moduleGlobal, moduleName, moduleEntry, moduleGlobals }, 
 		dest,
 		format: 'umd',
 		moduleName: moduleGlobal,
-		globals: Object.assign({
-			moduleGlobal: moduleGlobal
-		}, moduleGlobals),
+		globals: Object.assign({ moduleGlobal }, moduleGlobals),
 		banner: copyright,
 		sourceMap: false
 	};
@@ -108,7 +106,7 @@ function createBundle({ moduleGlobal, moduleName, moduleEntry, moduleGlobals }, 
  * @returns {Array.<String>}
  */
 function getDependenciesArray(pack) {
-	return Object.keys(pack.dependencies || {}).concat(Object.keys(pack.devDependencies || {}));
+	return Object.keys(pack.dependencies || {});
 }
 
 Promise.all(bundles.map(bundle => createBundle(bundle, 'packages/inferno/dist/')));

@@ -3,7 +3,7 @@ import {
 	isStringOrNumber,
 	isNullOrUndef,
 	isInvalid,
-} from './../shared';
+} from '../shared';
 import {
 	escapeText,
 	escapeAttr,

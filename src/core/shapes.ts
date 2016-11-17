@@ -2,7 +2,6 @@ import {
 	isStringOrNumber,
 	isArray,
 	isInvalid,
-	isUndefined,
 	isNullOrUndef,
 	isStatefulComponent
 } from '../shared';
@@ -99,7 +98,7 @@ function normalize(vNode) {
 	const children = vNode.children;
 
 	if (props) {
-		if (isNullOrUndef(children) && !isNullOrUndef(props.children)) {
+		if (isNullOrUndef(children) && props.children) {
 			vNode.children = props.children;
 		}
 		if (props.ref) {
@@ -119,7 +118,7 @@ export function createVNode(flags, type?, props?, children?, key?, ref?, noNorma
 		flags = isStatefulComponent(type) ? VNodeFlags.ComponentClass : VNodeFlags.ComponentFunction;
 	}
 	const vNode = {
-		children: isUndefined(children) ? null : children,
+		children: children || null,
 		dom: null,
 		flags: flags || 0,
 		key: key === undefined ? null : key,

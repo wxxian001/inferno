@@ -2115,10 +2115,10 @@ var version = '15.3.4';
 function normalizeProps(name, props) {
 	if (name === 'input' && props.onChange) {
 		var eventName = props.type === 'checkbox' ? 'onclick' : 'oninput';
-		
+
 		if (!props[eventName]) {
 			props[eventName] = props.onChange;
-			delete props.onChange; 
+			delete props.onChange;
 		}
 	}
 }

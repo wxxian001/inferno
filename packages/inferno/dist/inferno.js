@@ -12,7 +12,9 @@
 var NO_OP = '$NO_OP';
 var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
 var isBrowser = typeof window !== 'undefined' && window.document;
-
+function toArray(children) {
+    return isArray(children) ? children : (children ? [children] : children);
+}
 function isArray(obj) {
     return obj instanceof Array;
 }
@@ -81,22 +83,12 @@ function cloneVNode(vNodeToClone, props) {
             props.children = children;
         }
         else {
+            props.children = toArray(props.children);
             if (isArray(children)) {
-                if (isArray(props.children)) {
-                    props.children = props.children.concat(children);
-                }
-                else {
-                    props.children = [props.children].concat(children);
-                }
+                props.children = props.children.concat(children);
             }
             else {
-                if (isArray(props.children)) {
-                    props.children.push(children);
-                }
-                else {
-                    props.children = [props.children];
-                    props.children.push(children);
-                }
+                props.children.push(children);
             }
         }
     }
@@ -172,7 +164,7 @@ function normalize(vNode) {
     var props = vNode.props;
     var children = vNode.children;
     if (props) {
-        if (isNullOrUndef(children) && !isNullOrUndef(props.children)) {
+        if (isNullOrUndef(children) && props.children) {
             vNode.children = props.children;
         }
         if (props.ref) {
@@ -191,7 +183,7 @@ function createVNode(flags, type, props, children, key, ref, noNormalise) {
         flags = isStatefulComponent(type) ? 4 /* ComponentClass */ : 8 /* ComponentFunction */;
     }
     var vNode = {
-        children: isUndefined(children) ? null : children,
+        children: children || null,
         dom: null,
         flags: flags || 0,
         key: key === undefined ? null : key,

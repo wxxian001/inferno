@@ -426,7 +426,7 @@ function renderStyleToString$1(style) {
 function renderAttributes(props) {
     var outputAttrs = [];
     var propsKeys = (props && Object.keys(props)) || [];
-    propsKeys.forEach(function (propKey, i) {
+    propsKeys.forEach(function (propKey) {
         var value = props[propKey];
         switch (propKey) {
             case 'dangerouslySetInnerHTML':

@@ -2,7 +2,8 @@ import {
 	isUndefined,
 	isArray,
 	isNull,
-	isNullOrUndef
+	isNullOrUndef,
+	toArray
 } from '../shared';
 import {
 	createVNode,
@@ -22,19 +23,11 @@ export default function cloneVNode(vNodeToClone, props?, ..._children) {
 		if (isUndefined(props.children)) {
 			props.children = children;
 		} else {
+			props.children = toArray(props.children);
 			if (isArray(children)) {
-				if (isArray(props.children)) {
-					props.children = props.children.concat(children);
-				} else {
-					props.children = [props.children].concat(children);
-				}
+				props.children = props.children.concat(children);
 			} else {
-				if (isArray(props.children)) {
-					props.children.push(children);
-				} else {
-					props.children = [props.children];
-					props.children.push(children);
-				}
+				props.children.push(children);
 			}
 		}
 	}

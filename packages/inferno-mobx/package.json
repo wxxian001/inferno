@@ -24,9 +24,7 @@
 	],
 	"repository": "https://github.com/trueadm/inferno",
 	"dependencies": {
-		"inferno": "1.0.0-beta9"
-	},
-	"devDependencies": {
-		"mobx": "*"
+		"inferno": "1.0.0-beta9",
+    "mobx": "*"
 	}
 }
