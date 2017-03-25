@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { resolve, join } = require('path');
+const { emptyDirSync } = require('fs-extra');
 const { rollup } = require('rollup');
 const buble = require('rollup-plugin-buble');
 const replace = require('rollup-plugin-replace');
@@ -47,6 +48,11 @@ if (NODE_ENV === 'production') {
 } else {
 	filename += '.js';
 }
+
+// Remove all files
+emptyDirSync(join(cwd, 'dist'))
+
+// Place new files in this directory
 const dest = join(cwd, 'dist', filename);
 const bundleConfig = {
 	dest,
@@ -78,7 +84,7 @@ const plugins = [
 		'inferno-redux': resolve(__dirname, '../packages/inferno-redux/dist-es/index.js'),
 		'inferno-router': resolve(__dirname, '../packages/inferno-router/dist-es/index.js'),
 		'inferno-server': resolve(__dirname, '../packages/inferno-server/dist-es/index.js'),
-		inferno: resolve(__dirname, '../packages/inferno/dist-es/index.js')
+		'inferno': resolve(__dirname, '../packages/inferno/dist-es/index.js')
 	}),
 	nodeResolve({
 		jsnext: true,
